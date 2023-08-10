@@ -19,13 +19,8 @@ clk<=0;
 reset<=0;
 #5;
 reset<=1;
-#80;
-reset<=0;
-#5;
-reset<=1;
-#80;
+#200;
 $finish;
-
 end
 initial begin
     $dumpfile("c.vcd");
