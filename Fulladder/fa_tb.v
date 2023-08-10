@@ -8,7 +8,7 @@ module fa_tb();
     wire sum_tb;
     wire carry_tb;
 
-    fa u_fa0 (
+    fa_tb u_fa0 (
         .A(a_tb),
         .B(b_tb),
         .Cin(cin_tb),
@@ -17,9 +17,7 @@ module fa_tb();
     );
 
     initial begin
-        $dumpfile("fa_tb.vcd");
-        $dumpvars(0, fa_tb);
-        
+      
         a_tb = 0;
         b_tb = 0;
         cin_tb = 0;
@@ -33,8 +31,11 @@ module fa_tb();
         
         $display("sum_tb value is %b", sum_tb);
         $display("carry_tb value is %b", carry_tb);
-        
-        $finish;
+    end
+
+    initial begin
+        $dumpfile("fa.vcd");
+        $dumpvars(0, fa_tb);
     end
 
 endmodule
