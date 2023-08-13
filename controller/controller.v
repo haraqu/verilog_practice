@@ -65,7 +65,7 @@ else if (ph==3'b110)begin
      else
      rd=0;
     inc_pc=op;
-    if(op==3'b001)
+    if(op==3'b001 && zero=0)
     inc_pc=1;
     else
     inc_pc=0;
