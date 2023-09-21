@@ -1,30 +1,28 @@
-`timescale 1ps/1ps
 module alu_tb();
-reg [7:0]a;
-reg [7:0]b;
-reg [2:0]op;
-wire[7:0]res;
 
-alu u_alu0(
-.a(a),
-.b(b),
-.op(op),
-.res(res)
-);
+  // Inputs
+  reg [4:0] alu_op;
+  reg [31:0] op_a; 
+  reg [31:0] op_b;
 
-initial begin
-    a=8'b00000010; b=8'b00000001; op=3'b000;
-    #1;
-       $display("Test Case 1: out = %d", res);
-       a=8'b00000010; b=8'b00000001; op=3'b001;
-       #2;
+  // Outputs
+  wire [31:0] result;
 
-       $display("Test Case 1: out = %d", res);
+  // Instantiate the ALU module
+  alu uut (
+    .alu_op(alu_op),
+    .op_a(op_a),
+    .op_b(op_b),
+    .result(result)
+  );
 
-end
-initial begin
-    $dumpfile("alu.vcd");
-    $dumpvars(0,alu_tb);
-    end
-    
+  // Initialize signals and perform simulations
+  initial begin
+   op_b = 32'b00000000000000000000000000000001;
+   op_a = 32'b00000000000000000000000000000011;
+   #10;
+   alu_op= 01010;
+   #10;
+  end
+
 endmodule

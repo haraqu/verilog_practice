@@ -1,0 +1,36 @@
+$date
+	Mon Sep  4 11:44:53 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module alu_controller_tb $end
+$var wire 5 ! alu_op [4:0] $end
+$var reg 7 " fun7 [6:0] $end
+$var reg 3 # func3 [2:0] $end
+$var reg 1 $ i_type $end
+$var reg 1 % r_type $end
+$scope module u_aluc0 $end
+$var wire 7 & fun7 [6:0] $end
+$var wire 3 ' func3 [2:0] $end
+$var wire 1 $ i_type $end
+$var wire 1 % r_type $end
+$var reg 5 ( alu_op [4:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b110 (
+b110 '
+b0 &
+1%
+0$
+b110 #
+b0 "
+b110 !
+$end
+#10
