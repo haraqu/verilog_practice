@@ -1,0 +1,52 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Thu Sep 21 09:32:30 2023
+[*]
+[dumpfile] "/home/hassan/verilog/singlecycle/topmodule/tm.vcd"
+[dumpfile_mtime] "Thu Sep 21 09:04:50 2023"
+[dumpfile_size] 9138
+[savefile] "/home/hassan/verilog/singlecycle/tm.gtkw"
+[timestart] 0
+[size] 1296 704
+[pos] -51 -51
+*-5.765602 72 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] topmodule_tb.
+[treeopen] topmodule_tb.u_topmodule.
+[treeopen] topmodule_tb.u_topmodule.u_alu.
+[sst_width] 233
+[signals_width] 233
+[sst_expanded] 1
+[sst_vpaned_height] 180
+@24
+topmodule_tb.u_topmodule.clk
+topmodule_tb.u_topmodule.rst
+topmodule_tb.u_topmodule.instruct_en
+topmodule_tb.u_topmodule.instruction[31:0]
+topmodule_tb.u_topmodule.pc[31:0]
+@28
+topmodule_tb.u_topmodule.alu_op[4:0]
+@420
+topmodule_tb.u_topmodule.alu_op_a[31:0]
+topmodule_tb.u_topmodule.alu_op_b[31:0]
+@24
+topmodule_tb.u_topmodule.u_alu.result[31:0]
+@421
+topmodule_tb.u_topmodule.u_alu.result[31:0]
+@24
+topmodule_tb.u_topmodule.op_a_sel
+topmodule_tb.u_topmodule.op_b_sel
+topmodule_tb.u_topmodule.branch
+topmodule_tb.u_topmodule.branch_taken
+topmodule_tb.u_topmodule.data_in_rf[31:0]
+topmodule_tb.u_topmodule.imm[31:0]
+topmodule_tb.u_topmodule.jal
+topmodule_tb.u_topmodule.op_a[31:0]
+topmodule_tb.u_topmodule.op_b[31:0]
+topmodule_tb.u_topmodule.rd_addr[4:0]
+topmodule_tb.u_topmodule.rd_sel[1:0]
+topmodule_tb.u_topmodule.reg_write
+topmodule_tb.u_topmodule.result[31:0]
+topmodule_tb.u_topmodule.rs1_addr[4:0]
+topmodule_tb.u_topmodule.rs2_addr[4:0]
+[pattern_trace] 1
+[pattern_trace] 0
