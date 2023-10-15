@@ -4,15 +4,13 @@ module program_counter (
     jal,
     jalr,
     pc,
-    auipc,
     branch,
     branch_taken,
     rst,
     clk 
 );
     input wire                   rst;
-    input wire                branch;
-    input wire                 auipc;
+    input wire                branch; 
     input wire          branch_taken;
     input wire                   jal;
     input wire                  jalr;
@@ -26,9 +24,6 @@ always @(posedge clk ) begin
         pc <= -4;
     end 
     else if(branch && branch_taken)  begin 
-        pc <= result;
-    end
-    else if(auipc)begin
         pc <= result;
     end
     else if(jal)begin

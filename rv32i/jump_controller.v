@@ -3,13 +3,11 @@ module jump_controller(
     branch,
     op_a,
     op_b,
-    alu_op
 );
 
 input wire [31:0]        op_a;
 input wire [31:0]        op_b;
 output reg             branch;
-input wire [4:0]       alu_op;
 input wire [31:0] instruction;
 
 always @(*) begin

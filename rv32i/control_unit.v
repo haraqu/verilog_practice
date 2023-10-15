@@ -7,18 +7,18 @@ module control_unit(
   rd_addr,
   op_a_sel,
   imm,
+  req,
   alu_op,
   rd_sel,
   mem_read,
   branch_taken,
   jalr,
   jal,
-  auipc,
   mem_write
   );
 
   input wire [31:0] instruction; 
-  output reg              auipc;
+  output wire               req;
   output reg               jalr;
   output reg                jal;
   output reg          reg_write;
@@ -39,8 +39,9 @@ module control_unit(
    assign rd_addr  = instruction[11:7];
 
   always @(*)begin
-    branch_taken =1 ;
+    branch_taken =0 ;
     jal=0;
+    req = 1;
     if(instruction[6:0]== 7'b0110011)begin//r_type 
         reg_write=1;
         op_b_sel=0;
@@ -109,7 +110,6 @@ module control_unit(
       rd_sel=2'b10;
     end
     else if (instruction[6:0]==7'b0010111)begin//AUIPC 
-      auipc=1; 
       imm = { instruction[31:12], 12'b0} ;
       reg_write=1;
       op_a_sel=1;

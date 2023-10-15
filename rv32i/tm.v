@@ -47,7 +47,6 @@ module topmodule(
   wire[3:0]                      store_op;
   wire                             branch;
   wire                       branch_taken;
-  wire                              auipc;
   wire                               jalr;
   wire                                jal;
   wire[31:0] wrapper_mem_o_for_data_mem_i;
@@ -74,32 +73,30 @@ module topmodule(
     assign alu_op_a = op_a_sel ? pc  : op_a;
 
   jump_controller u_jc(
-    .instruction       (       instruction),
-    .op_a              (          alu_op_a),
-    .op_b              (          alu_op_b),
-    .alu_op            (            alu_op),
-    .branch            (            branch)
-);
+      .instruction       (       instruction),
+      .op_a              (              op_a),
+      .op_b              (              op_b),
+      .branch            (            branch)
+  );
 
 
- program_counter u_pc (
-    .branch_taken ( branch_taken),
-    .result       (       result),
-    .imm          (          imm),
-    .pc           (           pc),
-    .branch       (       branch),
-    .auipc        (        auipc),
-    .jal          (          jal),
-    .jalr         (         jalr),
-    .rst          (          rst),
-    .clk          (          clk) 
-);
-    instruct_mem u_ir0(
+  program_counter u_pc (
+      .branch_taken ( branch_taken),
+      .result       (       result),
+      .imm          (          imm),
+      .pc           (           pc),
+      .branch       (       branch),
+      .jal          (          jal),
+      .jalr         (         jalr),
+      .rst          (          rst),
+      .clk          (          clk) 
+  );
+  instruct_mem u_ir0(
       .addr_instr_mem (            pc[8:2]),
       .instruction    (        instruction),
       .instruct_en    (        instruct_en),
       .clk            (                clk)
-      );
+  );
 
   control_unit u_cu (
       .branch_taken      (      branch_taken),
@@ -110,7 +107,6 @@ module topmodule(
       .op_a_sel          (          op_a_sel),
       .alu_op            (            alu_op),
       .rs1_addr          (          rs1_addr),
-      .auipc             (             auipc),
       .jalr              (              jalr),
       .rs2_addr          (          rs2_addr),
       .imm               (               imm),
@@ -118,31 +114,31 @@ module topmodule(
       .mem_read          (          mem_read),
       .mem_write         (         mem_write),
       .rd_sel            (            rd_sel)
-    );
-    wrapper_mem  u_wm0(
-    .instruction                 (                 instruction),
-    .mem_addr                    (                result[13:0]),
-    .store_op                    (                    store_op),
-    .wrapper_mem_o               (               wrapper_mem_o),
-    .wrapper_mem_i               (                        op_b),
-    .mem_write                   (                   mem_write),
-    .mem_read                    (                    mem_read),
-    .wrapper_mem_o_for_data_mem_i(wrapper_mem_o_for_data_mem_i),
-    .clk                         (                         clk)
-);
+  );
+  wrapper_mem  u_wm0(
+      .instruction                 (                 instruction),
+      .mem_addr                    (                result[13:0]),
+      .store_op                    (                    store_op),
+      .wrapper_mem_o               (               wrapper_mem_o),
+      .wrapper_mem_i               (                        op_b),
+      .mem_write                   (                   mem_write),
+      .mem_read                    (                    mem_read),
+      .wrapper_mem_o_for_data_mem_i(wrapper_mem_o_for_data_mem_i),
+      .clk                         (                         clk)
+  );
     
-    always @(*)begin
-    if(rd_sel==2'b00)begin
-    data_in_rf = result ;
-    end
-    else if (rd_sel==2'b01)begin
-    data_in_rf = wrapper_mem_o;
-    end
-    else if (rd_sel==2'b10)begin
-    data_in_rf = imm;
-    end
-    else if (rd_sel==2'b11)begin
-    data_in_rf = pc + 4;
-    end
-    end
+  always @(*)begin
+  if(rd_sel==2'b00)begin
+  data_in_rf = result ;
+  end
+  else if (rd_sel==2'b01)begin
+  data_in_rf = wrapper_mem_o;
+  end
+  else if (rd_sel==2'b10)begin
+  data_in_rf = imm;
+  end
+  else if (rd_sel==2'b11)begin
+  data_in_rf = pc + 4;
+  end
+  end
 endmodule
