@@ -1,8 +1,7 @@
-`include "control_unit.v"
-`include "registerfile.v"
-`include "jump_controller.v"
+
 module dec(
   instruction,
+  load,
   reg_write,
   op_b_sel,
   rs2_addr,
@@ -12,6 +11,8 @@ module dec(
   imm,
   req,
   alu_op,
+  alu_op_b, 
+  alu_op_a,
   rd_sel,
   mem_read,
   branch_taken,
@@ -19,38 +20,47 @@ module dec(
   jal,
   mem_write,
   data_in,
+  data_in_rf,
   op_a,
   clk,
   en,
   rst,
+  pc,
   op_b,
   branch
 
 );
 
-  wire [31:0] instruction; 
-  wire                req;
-  wire               jalr;
-  wire                jal;
-  wire          reg_write;
-  wire [31:0]         imm;
-  wire           op_b_sel;
-  wire           op_a_sel;
-  wire [4:0]       alu_op;
-  wire [4:0]     rs1_addr;
-  wire [4:0]     rs2_addr;
-  wire [4:0]      rd_addr;
-  wire [1:0]       rd_sel;
-  wire           mem_read;
-  wire          mem_write;
-  wire       branch_taken;
-  wire                clk;
-  wire                rst;
-  wire                 en;
-  wire      [31:0]data_in;
-  wire         [31:0]op_a;
-  wire         [31:0]op_b;
-  wire             branch;
+  input wire [31:0]  instruction; 
+  input wire [31:0]   data_in_rf;
+  output wire                req;
+  output wire               jalr;
+  output wire                jal;
+  output wire          reg_write;
+  output wire [31:0]         imm;
+  output wire           op_b_sel;
+  output wire           op_a_sel;
+  output wire [4:0]       alu_op;
+  output wire [4:0]     rs1_addr;
+  output wire [4:0]     rs2_addr;
+  output wire [4:0]      rd_addr;
+  output wire [1:0]       rd_sel;
+  output wire           mem_read;
+  output wire          mem_write;
+  output wire       branch_taken;
+  input wire                 clk;
+  output wire                rst;
+  output wire                 en;
+  output wire      [31:0]data_in;
+  output wire         [31:0]op_a;
+  output wire         [31:0]op_b;
+  output wire             branch;
+  input wire [31:0]           pc;
+  output wire               load;
+  output wire [31:0]    alu_op_b; 
+  output wire [31:0]    alu_op_a;
+  
+
 
 
 
@@ -62,7 +72,7 @@ assign alu_op_a = op_a_sel ? pc  : op_a;
 control_unit u_cu (
       .branch_taken      (      branch_taken),
       .jal               (               jal),
-      .instruction       (     instruction_o),
+      .instruction       (       instruction),
       .reg_write         (         reg_write),
       .op_b_sel          (          op_b_sel),
       .op_a_sel          (          op_a_sel),
@@ -74,6 +84,7 @@ control_unit u_cu (
       .rd_addr           (           rd_addr),
       .mem_read          (          mem_read),
       .mem_write         (         mem_write),
+      .load              (              load),
       .rd_sel            (            rd_sel)
   );
 
@@ -90,7 +101,7 @@ control_unit u_cu (
   );     
 
   jump_controller u_jc(
-      .instruction       (     instruction_o),
+      .instruction       (       instruction),
       .op_a              (              op_a),
       .op_b              (              op_b),
       .branch            (            branch)

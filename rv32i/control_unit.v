@@ -1,5 +1,6 @@
 module control_unit(
   instruction,
+  load,
   reg_write,
   op_b_sel,
   rs2_addr,
@@ -18,7 +19,7 @@ module control_unit(
   );
 
   input wire [31:0] instruction; 
-  output wire               req;
+  output reg                req;
   output reg               jalr;
   output reg                jal;
   output reg          reg_write;
@@ -33,6 +34,7 @@ module control_unit(
   output reg           mem_read;
   output reg          mem_write;
   output reg       branch_taken;
+  output reg               load;
   
    assign rs1_addr = instruction[19:15];
    assign rs2_addr = instruction[24:20];
@@ -79,6 +81,7 @@ module control_unit(
       reg_write=1;
     end 
     else if(instruction[6:0]==7'b0000011)begin//load
+    load=1;
     imm = {{20{instruction[31]}}, instruction[31:20]};
     mem_read=1;
     reg_write=1;

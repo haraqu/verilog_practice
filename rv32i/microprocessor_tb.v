@@ -1,4 +1,4 @@
-module topmodule_tb();
+module microprocessor_tb();
 
 
   reg clk;
@@ -31,8 +31,8 @@ module topmodule_tb();
     $finish;
   end
   initial begin
-    $dumpfile("tm.vcd");
-    $dumpvars(0,topmodule_tb);
+    $dumpfile("microprocessor.vcd");
+    $dumpvars(0,microprocessor_tb);
   end
 
 endmodule

@@ -10,8 +10,6 @@ module alu(
     input wire [31:0]  op_b;
     output reg [31:0]result;
 
-
-
     always @(*)begin
 
     case (alu_op)

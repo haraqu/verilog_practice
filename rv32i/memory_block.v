@@ -1,12 +1,14 @@
-`include "wrapper_mem.v"
 module mem(
     wrapper_mem_o,
+    w_data,
+    instruction,
     wrapper_mem_i,
-    data_mem_o,
-    mem_write,
+    r_data,
     store_op,
-    mem_read,
+    result,
+    wr_en,
     mem_addr,
+    op_b,
     func3, 
     req,
     clk   
@@ -14,27 +16,31 @@ module mem(
 
  input wire [2:0]                        func3;
  input wire [13:0]                    mem_addr; 
- output reg [3:0]                     store_op;
- input wire [31:0]                  data_mem_o;
+ output wire[3:0]                     store_op;
+ input wire [31:0]                      r_data;
  input wire [31:0]               wrapper_mem_i;
- input wire                          mem_write;
- input wire                           mem_read;
+ output wire                             wr_en;
  input wire                                clk;
- output reg [31:0]               wrapper_mem_o;
- output reg                                req;
+ output wire[31:0]               wrapper_mem_o;
+ output wire                               req;
+ input wire [31:0]                      result;
+ input wire [31:0]                        op_b;
+ input wire[31:0]                  instruction;
+ output wire [31:0]                     w_data;
 
-assign req = 1 ;
+
+assign req = 1'b1 ;
 
  wrapper_mem  u_wrapper(
-    .wrapper_mem_o  (      wrapper_mem_o),
-    .wrapper_mem_i  (      wrapper_mem_i),
-    .func3          ( instruction[14:12]), 
-    .data_mem_o     (         data_mem_o),
-    .mem_write      (          mem_write),
-    .store_op       (           store_op),
-    .mem_read       (           mem_read),
-    .mem_addr       (           mem_addr),
-    .clk            (                clk)   
+    .wrapper_mem_o     (      wrapper_mem_o),
+    .wrapper_mem_i     (               op_b),
+    .w_data            (             w_data),
+    .func3             ( instruction[14:12]), 
+    .r_data            (             r_data),
+    .store_op          (           store_op),
+    .wr_en             (              wr_en),
+    .mem_addr          (       result[13:0]),
+    .clk               (                clk)   
   );
 
   endmodule

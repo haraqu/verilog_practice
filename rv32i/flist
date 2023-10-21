@@ -1,0 +1,15 @@
+/home/hassan/verilog/rv32i/alu.v
+/home/hassan/verilog/rv32i/control_unit.v
+/home/hassan/verilog/rv32i/core.v
+/home/hassan/verilog/rv32i/decode_block.v
+/home/hassan/verilog/rv32i/execution_block.v
+/home/hassan/verilog/rv32i/fetch_block.v
+/home/hassan/verilog/rv32i/jump_controller.v
+/home/hassan/verilog/rv32i/memory_block.v
+/home/hassan/verilog/rv32i/memory.v
+/home/hassan/verilog/rv32i/microprocessor_tb.v
+/home/hassan/verilog/rv32i/microprocessor.v
+/home/hassan/verilog/rv32i/pc.v
+/home/hassan/verilog/rv32i/registerfile.v
+/home/hassan/verilog/rv32i/wrapper_mem.v
+/home/hassan/verilog/rv32i/write_back_block.v
